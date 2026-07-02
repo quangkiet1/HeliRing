@@ -50,9 +50,9 @@ const config: Config = {
         'glow-strong': '0 0 35px rgba(6, 182, 212, 0.3)',
       },
       fontFamily: {
-        sans: ['Plus Jakarta Sans', 'General Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        display: ['Satoshi', 'Plus Jakarta Sans', 'sans-serif'],
-        mono: ['General Sans', 'JetBrains Mono', 'Fira Code', 'monospace'],
+        sans: ['Be Vietnam Pro', 'sans-serif'],
+        display: ['Be Vietnam Pro', 'sans-serif'],
+        mono: ['Be Vietnam Pro', 'sans-serif'],
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',

@@ -146,7 +146,7 @@ export default function BioPulseTracker() {
 
       {/* 3. Real-time Biometric Monitor HUD (Bottom-Left Card/Pill) */}
       <div 
-        className={`absolute bottom-6 left-6 hidden max-w-sm rounded-[2rem] border border-slate-200 bg-white/95 shadow-2xl backdrop-blur-md transition-all duration-500 overflow-hidden pointer-events-auto dark:border-slate-800 dark:bg-slate-900/95 sm:block md:left-12 ${
+        className={`absolute bottom-6 left-6 hidden max-w-sm rounded-[2rem] border border-slate-200 bg-white/95 shadow-2xl backdrop-blur-md transition-all duration-500 overflow-hidden pointer-events-auto dark:border-slate-800 dark:bg-slate-900/95 xl:block xl:left-12 ${
           isExpanded ? 'p-5 w-[280px] sm:w-[320px]' : 'p-2.5 w-[210px] sm:w-[230px]'
         }`}
       >

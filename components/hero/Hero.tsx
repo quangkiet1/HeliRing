@@ -50,7 +50,7 @@ export default function Hero() {
               className="text-5xl md:text-[5.5rem] font-black text-slate-900 dark:text-white leading-[0.9] tracking-tight mb-6 uppercase"
             >
               {t('hero_title_1')}<br/>
-              <span className="bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent">
+              <span className="text-emerald-500">
                 {t('hero_title_2')} {t('hero_title_3')}
               </span>
             </motion.h1>
@@ -134,7 +134,7 @@ export default function Hero() {
               <motion.div 
                 animate={{ y: [0, -6, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute right-2 top-8 max-w-[140px] rounded-2xl border border-slate-200 bg-white/95 p-3 shadow-sm transition-colors dark:border-emerald-300/10 dark:bg-slate-900/80 md:right-6 lg:top-12"
+                className="absolute right-2 top-8 z-20 max-w-[140px] rounded-2xl border border-slate-200 bg-white/95 p-3 shadow-sm transition-colors dark:border-emerald-300/10 dark:bg-slate-900/80 md:right-6 lg:top-12"
               >
                 <div className="flex items-center gap-1">
                   <Zap className="w-3.5 h-3.5 text-amber-500" />
@@ -147,7 +147,7 @@ export default function Hero() {
               <motion.div 
                 animate={{ y: [0, 6, 0] }}
                 transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                className="absolute bottom-6 left-2 max-w-[150px] rounded-2xl border border-slate-200 bg-white/95 p-3 shadow-sm transition-colors dark:border-cyan-300/10 dark:bg-slate-900/80 md:left-8 lg:bottom-10"
+                className="absolute bottom-6 left-2 z-20 max-w-[150px] rounded-2xl border border-slate-200 bg-white/95 p-3 shadow-sm transition-colors dark:border-cyan-300/10 dark:bg-slate-900/80 md:left-8 lg:bottom-10"
               >
                 <span className="text-[9px] font-mono text-emerald-600 dark:text-emerald-400 font-black block uppercase tracking-wider">{t('hero_hud_sleep')}</span>
                 <p className="text-sm font-bold text-slate-800 dark:text-slate-100 mt-0.5">8h 15m</p>

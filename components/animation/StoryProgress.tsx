@@ -23,7 +23,7 @@ export default function StoryProgress() {
   };
 
   return (
-    <aside className="pointer-events-none fixed right-4 top-1/2 z-40 hidden -translate-y-1/2 lg:block">
+    <aside className="pointer-events-none fixed right-4 top-1/2 z-40 hidden -translate-y-1/2 xl:block">
       <div className="relative flex min-h-80 flex-col items-center justify-between rounded-full border border-slate-200/70 bg-white/80 px-2 py-4 shadow-sm backdrop-blur-xl dark:border-slate-800/80 dark:bg-slate-950/70">
         <div className="absolute left-1/2 top-5 h-[calc(100%-2.5rem)] w-px -translate-x-1/2 bg-slate-200 dark:bg-slate-800" />
         <motion.div

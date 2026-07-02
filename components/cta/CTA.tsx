@@ -11,7 +11,9 @@ export default function CTA() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !email.includes('@')) {
+    const normalizedEmail = email.trim();
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
       setStatus('error');
       setMessage(language === 'vi' ? 'Vui lòng nhập địa chỉ email hợp lệ.' : 'Please enter a valid email address.');
       setTimeout(() => setStatus('idle'), 4000);
@@ -21,10 +23,12 @@ export default function CTA() {
     setStatus('loading');
     
     try {
-      // WEBHOOK DISCORD
-      const WEBHOOK_URL = import.meta.env.VITE_DISCORD_WEBHOOK_URL || 'https://discord.com/api/webhooks/000000000000000000/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
+      const SUBSCRIBE_URL = '/api/subscribe';
       
       const payload = {
+        email: normalizedEmail,
+        language,
+        source: 'heliring-pro-landing',
         embeds: [
           {
             title: language === 'vi' ? "🎉 Đăng ký mới: HeliRing Pro" : "🎉 New Registration: HeliRing Pro",
@@ -38,7 +42,7 @@ export default function CTA() {
         ]
       };
 
-      const response = await fetch(WEBHOOK_URL, {
+      const response = await fetch(SUBSCRIBE_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -49,7 +53,8 @@ export default function CTA() {
         setMessage(t('cta_form_success_desc'));
         setEmail('');
       } else {
-        throw new Error('Webhook error');
+        const payload = await response.json().catch(() => null);
+        throw new Error(payload?.message || t('cta_form_error_desc'));
       }
     } catch (err) {
       // Simulation success if webhook URL is not configured

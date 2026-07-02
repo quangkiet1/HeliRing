@@ -149,7 +149,7 @@ export default function Chatbot() {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end sm:bottom-6 sm:right-6">
+    <div className="fixed bottom-4 right-4 z-50 hidden flex-col items-end sm:flex sm:bottom-6 sm:right-6">
       
       {/* Chat Window Panel */}
       <AnimatePresence>
@@ -214,9 +214,9 @@ export default function Chatbot() {
                     <Bot className="w-4 h-4" />
                   </div>
                   <div className="bg-slate-100 dark:bg-slate-900 rounded-2xl p-3.5 rounded-tl-none flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-slate-400 dark:bg-slate-600 animate-bounce" style={{ animationDelay: '0ms' }} />
-                    <span className="w-1.5 h-1.5 rounded-full bg-slate-400 dark:bg-slate-600 animate-bounce" style={{ animationDelay: '150ms' }} />
-                    <span className="w-1.5 h-1.5 rounded-full bg-slate-400 dark:bg-slate-600 animate-bounce" style={{ animationDelay: '300ms' }} />
+                    <span className="w-1.5 h-1.5 rounded-full bg-slate-400 dark:bg-slate-600 animate-pulse" style={{ animationDelay: '0ms' }} />
+                    <span className="w-1.5 h-1.5 rounded-full bg-slate-400 dark:bg-slate-600 animate-pulse" style={{ animationDelay: '150ms' }} />
+                    <span className="w-1.5 h-1.5 rounded-full bg-slate-400 dark:bg-slate-600 animate-pulse" style={{ animationDelay: '300ms' }} />
                   </div>
                 </div>
               )}
@@ -230,7 +230,7 @@ export default function Chatbot() {
                   <button
                     key={idx}
                     onClick={() => handleSend(q)}
-                    className="text-[10px] font-medium px-2.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-emerald-500/50 hover:bg-emerald-500/5 text-slate-500 dark:text-slate-400 hover:text-emerald-500 dark:hover:text-emerald-400 transition-all text-left"
+                    className="text-[10px] font-medium px-2.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-emerald-500/50 text-slate-500 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-300 transition-all text-left"
                   >
                     {q}
                   </button>
@@ -256,7 +256,7 @@ export default function Chatbot() {
               <button 
                 type="submit"
                 disabled={!inputValue.trim()}
-                className="w-9 h-9 rounded-2xl bg-emerald-500 disabled:bg-slate-100 dark:disabled:bg-slate-900 disabled:text-slate-400 text-white flex items-center justify-center hover:bg-emerald-600 transition-all shrink-0 cursor-pointer"
+                className="w-9 h-9 rounded-2xl bg-emerald-500 disabled:bg-emerald-200 dark:disabled:bg-emerald-900 disabled:text-white text-white flex items-center justify-center hover:bg-emerald-600 transition-all shrink-0 cursor-pointer"
               >
                 <Send className="w-4 h-4" />
               </button>
