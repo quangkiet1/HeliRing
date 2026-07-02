@@ -1,0 +1,6 @@
+{
+  "name": "HeliRing Pro",
+  "description": "HeliRing Pro - Nhẫn sức khỏe thông minh thế hệ mới từ HELICORP, theo dõi sinh hiệu chuẩn y khoa 24/7 với chế độ sáng tối linh hoạt.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
