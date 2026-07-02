@@ -61,6 +61,46 @@ function StudioEnvironment() {
   return null;
 }
 
+function RingLoadingSkeleton({
+  reducedMotion,
+  variant,
+}: {
+  reducedMotion: boolean;
+  variant: RingVariant;
+}) {
+  const shellRef = useRef<Group>(null);
+  const isHero = variant === 'hero';
+
+  useFrame((state, delta) => {
+    if (!shellRef.current || reducedMotion) return;
+
+    shellRef.current.rotation.y += delta * (isHero ? 0.55 : 0.35);
+    shellRef.current.rotation.x = -0.1 + Math.sin(state.clock.elapsedTime * 1.2) * 0.025;
+  });
+
+  return (
+    <group ref={shellRef} rotation={[-0.1, -0.5, -0.03]} scale={isHero ? 1.38 : 1.85}>
+      <mesh>
+        <torusGeometry args={[1, 0.18, 18, 96]} />
+        <meshStandardMaterial
+          color="#d7f8ef"
+          emissive="#10b981"
+          emissiveIntensity={0.12}
+          metalness={0.4}
+          opacity={0.38}
+          roughness={0.25}
+          transparent
+          wireframe
+        />
+      </mesh>
+      <mesh scale={[0.82, 0.82, 0.82]}>
+        <torusGeometry args={[1, 0.025, 10, 72]} />
+        <meshBasicMaterial color="#34d399" opacity={0.28} transparent wireframe />
+      </mesh>
+    </group>
+  );
+}
+
 function RingModel({
   pointer,
   reducedMotion,
@@ -239,7 +279,7 @@ export default function Ring3D({
           <directionalLight position={[-2.8, 1.6, 3.2]} intensity={isHero ? 1.15 : 0.45} color="#a7f3d0" />
           <pointLight position={[-3, 1.4, 2.8]} intensity={isHero ? 1.45 : 1.1} color="#10b981" />
           <pointLight position={[2.4, -1.8, 3]} intensity={isHero ? 1.1 : 0.8} color="#38bdf8" />
-          <Suspense fallback={null}>
+          <Suspense fallback={<RingLoadingSkeleton reducedMotion={reducedMotion} variant={variant} />}>
             <RingModel pointer={pointer} reducedMotion={reducedMotion} variant={variant} />
           </Suspense>
         </Canvas>
