@@ -9,9 +9,9 @@ interface Message {
   timestamp: Date;
 }
 
-export default function Chatbot() {
+export default function Chatbot({ initiallyOpen = false }: { initiallyOpen?: boolean }) {
   const { t, language } = useLanguage();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(initiallyOpen);
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);

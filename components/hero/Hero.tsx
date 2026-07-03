@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useEffect, useState } from 'react';
+import React, { Suspense, lazy, useState } from 'react';
 import { useLanguage } from '@/providers/LanguageProvider';
 import { ChevronRight, CheckCircle2, Zap } from 'lucide-react';
 
@@ -8,7 +8,7 @@ function Ring3DFallback() {
   return (
     <div className="relative z-10 mx-auto flex h-[22rem] w-full max-w-[38rem] items-center justify-center md:h-[30rem] lg:h-[36rem]">
       <div className="absolute inset-[8%] rounded-full bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.22)_0%,rgba(6,182,212,0.1)_38%,transparent_70%)] blur-3xl" />
-      <div className="relative h-48 w-48 rotate-[-16deg] rounded-full border-[26px] border-slate-300/80 bg-transparent shadow-[inset_18px_0_30px_rgba(255,255,255,0.9),inset_-18px_0_26px_rgba(15,23,42,0.12),0_34px_90px_rgba(16,185,129,0.22)] dark:border-slate-500/70 md:h-64 md:w-64 md:border-[34px]">
+      <div className="relative h-48 w-48 animate-[spin_12s_linear_infinite] rounded-full border-[26px] border-slate-300/80 bg-transparent shadow-[inset_18px_0_30px_rgba(255,255,255,0.9),inset_-18px_0_26px_rgba(15,23,42,0.12),0_34px_90px_rgba(16,185,129,0.22)] dark:border-slate-500/70 md:h-64 md:w-64 md:border-[34px]">
         <div className="absolute inset-[-30px] rounded-full border border-white/70 dark:border-white/10" />
         <div className="absolute inset-[-18px] rounded-full bg-[conic-gradient(from_120deg,rgba(255,255,255,0.82),rgba(148,163,184,0.1),rgba(16,185,129,0.2),rgba(255,255,255,0.62))] opacity-70 mix-blend-multiply dark:mix-blend-screen" />
         <div className="absolute inset-[32%] rounded-full bg-emerald-300/80 blur-[4px] shadow-[0_0_36px_rgba(16,185,129,0.8)]" />
@@ -20,29 +20,6 @@ function Ring3DFallback() {
 export default function Hero() {
   const { t } = useLanguage();
   const [shouldLoadRing, setShouldLoadRing] = useState(false);
-
-  useEffect(() => {
-    const loadRing = () => setShouldLoadRing(true);
-    const canUseHeavy3D = window.matchMedia('(min-width: 768px)').matches;
-    const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
-
-    if (!canUseHeavy3D || connection?.saveData) {
-      return;
-    }
-
-    const scheduler = window as Window & {
-      requestIdleCallback?: (callback: IdleRequestCallback, options?: IdleRequestOptions) => number;
-      cancelIdleCallback?: (handle: number) => void;
-    };
-
-    if (scheduler.requestIdleCallback && scheduler.cancelIdleCallback) {
-      const idleId = scheduler.requestIdleCallback(loadRing, { timeout: 1200 });
-      return () => scheduler.cancelIdleCallback?.(idleId);
-    }
-
-    const timeoutId = window.setTimeout(loadRing, 450);
-    return () => window.clearTimeout(timeoutId);
-  }, []);
 
   return (
     <section className="relative min-h-[92vh] flex items-center pt-24 md:pt-36 pb-16 overflow-hidden bg-white dark:bg-slate-950 transition-colors duration-500">
@@ -147,7 +124,16 @@ export default function Hero() {
                   <Ring3D variant="hero" className="mx-auto" />
                 </Suspense>
               ) : (
-                <Ring3DFallback />
+                <>
+                  <Ring3DFallback />
+                  <button
+                    type="button"
+                    onClick={() => setShouldLoadRing(true)}
+                    className="absolute bottom-4 left-1/2 z-30 -translate-x-1/2 rounded-full border border-emerald-200 bg-white/90 px-4 py-2 text-xs font-black uppercase tracking-wide text-emerald-700 shadow-sm backdrop-blur transition hover:-translate-y-0.5 hover:bg-emerald-50 dark:border-emerald-300/20 dark:bg-slate-950/80 dark:text-emerald-300 dark:hover:bg-slate-900 md:bottom-8"
+                  >
+                    Xem 3D
+                  </button>
+                </>
               )}
 
               <div className="pointer-events-none absolute left-[12%] top-[22%] hidden h-px w-20 bg-gradient-to-r from-transparent via-emerald-300/25 to-emerald-300/0 md:block" />

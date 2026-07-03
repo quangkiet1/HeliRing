@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Suspense, lazy, useEffect, useState } from 'react';
+import React, { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import Hero from '@/components/hero/Hero';
@@ -20,6 +20,64 @@ function SectionFallback() {
   return (
     <div className="mx-auto flex min-h-[28rem] max-w-7xl items-center justify-center px-6 py-24 md:px-12">
       <div className="h-32 w-full max-w-4xl animate-pulse rounded-[2rem] border border-slate-200 bg-slate-100/70 dark:border-slate-800 dark:bg-slate-900/60" />
+    </div>
+  );
+}
+
+function useNearViewport<T extends HTMLElement>(rootMargin = '250px') {
+  const ref = useRef<T | null>(null);
+  const [isNear, setIsNear] = useState(false);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node || isNear) return;
+
+    if (!('IntersectionObserver' in window)) {
+      setIsNear(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsNear(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin },
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [isNear, rootMargin]);
+
+  return { ref, isNear };
+}
+
+function LazyStorySection({
+  id,
+  children,
+  minHeight = 'min-h-[32rem]',
+}: {
+  id?: string;
+  children: React.ReactNode;
+  minHeight?: string;
+}) {
+  const { ref, isNear } = useNearViewport<HTMLElement>();
+
+  return (
+    <section id={id} ref={ref} className={`story-panel relative ${!isNear ? minHeight : ''}`}>
+      {isNear ? <Suspense fallback={<SectionFallback />}>{children}</Suspense> : <SectionFallback />}
+    </section>
+  );
+}
+
+function LazyPlainSection({ children }: { children: React.ReactNode }) {
+  const { ref, isNear } = useNearViewport<HTMLDivElement>();
+
+  return (
+    <div ref={ref} className={!isNear ? 'min-h-[32rem]' : undefined}>
+      {isNear ? <Suspense fallback={<SectionFallback />}>{children}</Suspense> : <SectionFallback />}
     </div>
   );
 }
@@ -50,6 +108,7 @@ function useIdleDesktopDecorations() {
 
 export default function Home() {
   const loadDecorations = useIdleDesktopDecorations();
+  const [chatbotEnabled, setChatbotEnabled] = useState(false);
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
@@ -65,9 +124,23 @@ export default function Home() {
       <Header />
 
       {/* Floating AI Chatbot Assistant */}
-      <Suspense fallback={null}>
-        <Chatbot />
-      </Suspense>
+      {chatbotEnabled ? (
+        <Suspense fallback={null}>
+          <Chatbot initiallyOpen />
+        </Suspense>
+      ) : (
+        <button
+          type="button"
+          onClick={() => setChatbotEnabled(true)}
+          className="fixed bottom-4 right-4 z-50 hidden h-12 w-12 items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg shadow-emerald-500/20 transition-transform hover:scale-105 hover:bg-emerald-600 sm:bottom-6 sm:right-6 sm:flex sm:h-14 sm:w-14"
+          aria-label="Open AI assistant"
+        >
+          <span className="absolute inset-0 rounded-full border-2 border-emerald-400/30 animate-ping" />
+          <span className="relative h-5 w-5 rounded-md border-2 border-white">
+            <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full border border-white bg-amber-500" />
+          </span>
+        </button>
+      )}
 
       {/* Scrollytelling progress rail */}
       {loadDecorations && (
@@ -85,51 +158,39 @@ export default function Home() {
         </section>
 
         {/* Section 2: Problem Context - The invisible threat (PM2.5, dust) */}
-        <section id="problem-context" className="story-panel relative">
-          <Suspense fallback={<SectionFallback />}>
-            <ProblemContext />
-          </Suspense>
-        </section>
+        <LazyStorySection id="problem-context">
+          <ProblemContext />
+        </LazyStorySection>
 
         {/* Section 2.5: Interactive Vitals Simulation & Live ECG HUD */}
-        <Suspense fallback={<SectionFallback />}>
+        <LazyPlainSection>
           <VitalsSimulator />
-        </Suspense>
+        </LazyPlainSection>
 
         {/* Section 3: Deep Dive Features & Clinical filtration tech */}
-        <section id="technology" className="story-panel relative">
-          <Suspense fallback={<SectionFallback />}>
-            <TechShowcase />
-          </Suspense>
-        </section>
+        <LazyStorySection id="technology">
+          <TechShowcase />
+        </LazyStorySection>
 
         {/* Section 4: Portability Showcase - fits in car cup holders & backpacks */}
-        <section id="portability-showcase" className="story-panel relative">
-          <Suspense fallback={<SectionFallback />}>
-            <Portability />
-          </Suspense>
-        </section>
+        <LazyStorySection id="portability-showcase">
+          <Portability />
+        </LazyStorySection>
 
         {/* Section 5: Bento Box Specs Section - Technical indicators */}
-        <section id="specifications" className="story-panel relative">
-          <Suspense fallback={<SectionFallback />}>
-            <Specs />
-          </Suspense>
-        </section>
+        <LazyStorySection id="specifications">
+          <Specs />
+        </LazyStorySection>
 
         {/* Section 6: Use Cases - Car, Office, Bedroom scenarios */}
-        <section id="lifestyle-use-cases" className="story-panel relative">
-          <Suspense fallback={<SectionFallback />}>
-            <UseCases />
-          </Suspense>
-        </section>
+        <LazyStorySection id="lifestyle-use-cases">
+          <UseCases />
+        </LazyStorySection>
 
         {/* Section 7: Final Conversion Point - Gmail discount email submission */}
-        <section id="newsletter-conversion" className="story-panel relative">
-          <Suspense fallback={<SectionFallback />}>
-            <CTA />
-          </Suspense>
-        </section>
+        <LazyStorySection id="newsletter-conversion">
+          <CTA />
+        </LazyStorySection>
 
       </main>
 
