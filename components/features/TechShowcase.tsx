@@ -56,7 +56,7 @@ export default function TechShowcase() {
       shortName: t('layer_2_sub'),
       efficiency: t('layer_2_eff'),
       desc: t('layer_2_desc'),
-      color: 'from-indigo-500 to-purple-600',
+      color: 'from-sky-500 to-cyan-600',
       icon: <Brain className="w-5 h-5 text-white" />
     },
     {
@@ -117,7 +117,7 @@ export default function TechShowcase() {
           </div>
           <h2 className="text-4xl md:text-6xl font-black tracking-tight text-slate-900 dark:text-white uppercase leading-[0.95] mb-6">
             {t('tech_title_1')} <br/>
-            <span className="bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent">
+            <span className="text-emerald-500 dark:text-emerald-300">
               {t('tech_title_2')}
             </span>
           </h2>

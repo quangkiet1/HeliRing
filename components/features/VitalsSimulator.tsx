@@ -171,7 +171,7 @@ export default function VitalsSimulator() {
           </div>
           <h2 className="text-4xl md:text-6xl font-black tracking-tight text-slate-900 dark:text-white uppercase leading-[0.95] mb-6">
             {t('sim_title_1')} <br/>
-            <span className="bg-gradient-to-r from-emerald-500 to-sky-400 bg-clip-text text-transparent">
+            <span className="text-emerald-500 dark:text-emerald-300">
               {t('sim_title_2')}
             </span>
           </h2>
@@ -245,7 +245,7 @@ export default function VitalsSimulator() {
               <button
                 onClick={handleStartScan}
                 disabled={isScanning}
-                className="w-full py-4 px-6 rounded-2xl bg-slate-900 dark:bg-emerald-500 text-white dark:text-slate-950 font-bold uppercase tracking-wider text-sm hover:opacity-90 transition-all flex items-center justify-center gap-2.5 disabled:opacity-50 cursor-pointer"
+                className="w-full py-4 px-6 rounded-2xl bg-slate-900 dark:bg-emerald-500 text-white dark:text-white font-bold uppercase tracking-wider text-sm hover:opacity-90 transition-all flex items-center justify-center gap-2.5 disabled:opacity-50 cursor-pointer"
               >
                 {isScanning ? (
                   <>

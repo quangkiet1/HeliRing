@@ -57,12 +57,8 @@ export default function CTA() {
         throw new Error(payload?.message || t('cta_form_error_desc'));
       }
     } catch (err) {
-      // Simulation success if webhook URL is not configured
-      setTimeout(() => {
-        setStatus('success');
-        setMessage(t('cta_form_success_desc'));
-        setEmail('');
-      }, 1000);
+      setStatus('error');
+      setMessage(err instanceof Error ? err.message : t('cta_form_error_desc'));
     }
 
     // Auto hide toast after 4s
@@ -90,7 +86,7 @@ export default function CTA() {
 
         <h2 className="text-4xl md:text-6xl font-black tracking-tight uppercase leading-[0.95] mb-6">
           {language === 'vi' ? 'Làm Chủ Chỉ Số Sinh Hiệu' : 'Master Your Body Vitals'} <br/>
-          <span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">
+          <span className="text-emerald-300">
             {language === 'vi' ? 'Chuẩn Y Khoa' : 'Clinical Grade'}
           </span>
         </h2>
@@ -120,11 +116,11 @@ export default function CTA() {
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="px-6 py-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black uppercase tracking-wider text-sm transition-all shadow-glow hover:shadow-glow-strong flex items-center justify-center gap-2 shrink-0 cursor-pointer disabled:opacity-50"
+              className="px-6 py-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white font-black uppercase tracking-wider text-sm transition-all shadow-glow hover:shadow-glow-strong flex items-center justify-center gap-2 shrink-0 cursor-pointer disabled:opacity-50"
             >
               {status === 'loading' ? (
                 <>
-                  <div className="w-4 h-4 border-2 border-slate-950 border-t-transparent rounded-full animate-spin" />
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                   {t('cta_form_sending')}
                 </>
               ) : (

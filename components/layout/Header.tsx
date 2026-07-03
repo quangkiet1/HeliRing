@@ -78,7 +78,7 @@ export default function Header() {
           {/* CTA Header Button */}
           <a 
             href="#cta"
-            className="px-6 py-2.5 bg-slate-900 dark:bg-emerald-500 text-white dark:text-slate-950 rounded-full text-sm font-bold uppercase hover:bg-slate-800 dark:hover:bg-emerald-400 transition-colors shadow-lg shadow-slate-200 dark:shadow-none tracking-wider"
+            className="px-6 py-2.5 bg-slate-900 dark:bg-emerald-500 text-white dark:text-white rounded-full text-sm font-bold uppercase hover:bg-slate-800 dark:hover:bg-emerald-400 transition-colors shadow-lg shadow-slate-200 dark:shadow-none tracking-wider"
           >
             {t('cta_now')}
           </a>
@@ -153,7 +153,7 @@ export default function Header() {
           <a 
             href="#cta"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-center uppercase tracking-wider text-sm shadow-lg shadow-emerald-500/10"
+            className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-center uppercase tracking-wider text-sm shadow-lg shadow-emerald-500/10"
           >
             {t('cta_now')}
           </a>

@@ -256,7 +256,7 @@ export default function AirParticles() {
             </div>
             <h2 className="text-4xl md:text-6xl font-display font-black text-slate-100 uppercase tracking-tighter leading-[1.5] md:leading-[1.5] mb-6">
               Khởi Động Dòng <br/>
-              <span className="bg-gradient-to-r from-cyan-400 to-teal-400 bg-clip-text text-transparent">Thanh Lọc Chủ Động</span>
+              <span className="text-cyan-300">Thanh Lọc Chủ Động</span>
             </h2>
             <p className="text-base md:text-lg text-slate-300 max-w-xl mx-auto leading-relaxed">
               Màng lọc HEPA H13 cùng dòng phóng 10 triệu Plasma Ion/cm³ lập tức bao vây, làm lắng các hạt bụi lơ lửng và phá hủy màng tế bào của vi khuẩn độc hại.

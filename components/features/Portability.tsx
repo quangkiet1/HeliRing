@@ -69,7 +69,7 @@ export default function Portability() {
                   <span className="text-[9px] font-mono text-slate-400 uppercase tracking-wider">Readiness</span>
                   
                   {/* Decorative glowing semi-circle indicator */}
-                  <div className="absolute inset-0 rounded-full border-t-4 border-l-4 border-emerald-500 -m-1" />
+                  <div className="absolute inset-[-5px] rounded-full border border-emerald-500/45 shadow-[0_0_24px_rgba(16,185,129,0.22)]" />
                 </div>
 
                 {/* Vitals Feed Items */}
@@ -110,7 +110,7 @@ export default function Portability() {
 
             <h2 className="text-4xl md:text-6xl font-black tracking-tight text-slate-900 dark:text-white uppercase leading-[0.95] mb-6">
               {t('port_title_1')} <br/>
-              <span className="bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent">
+              <span className="text-emerald-500 dark:text-emerald-300">
                 {t('port_title_2')}
               </span>
             </h2>
