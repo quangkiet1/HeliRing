@@ -167,6 +167,7 @@ export default function BioPulseTracker() {
               <button 
                 onClick={() => setIsExpanded(false)}
                 className="p-1 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-600 transition-colors"
+                aria-label={language === 'vi' ? 'Thu nhỏ bảng sinh hiệu' : 'Minimize vitals panel'}
                 title={language === 'vi' ? 'Thu nhỏ' : 'Minimize'}
               >
                 <ChevronDown className="w-4 h-4" />
@@ -215,6 +216,8 @@ export default function BioPulseTracker() {
           <button 
             onClick={() => setIsExpanded(true)}
             className="w-full flex items-center justify-between gap-2.5 text-left focus:outline-none"
+            aria-label={language === 'vi' ? 'Mở rộng bảng sinh hiệu trực tiếp' : 'Expand live vitals panel'}
+            aria-expanded={isExpanded}
           >
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-950/50 flex items-center justify-center text-emerald-500 shrink-0">

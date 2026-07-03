@@ -179,6 +179,7 @@ export default function Chatbot() {
               <button 
                 onClick={() => setIsOpen(false)}
                 className="w-8 h-8 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-850 flex items-center justify-center text-slate-400 hover:text-slate-600 transition-colors"
+                aria-label={language === 'vi' ? 'Đóng trợ lý AI' : 'Close AI assistant'}
               >
                 <X className="w-4 h-4" />
               </button>
@@ -246,17 +247,23 @@ export default function Chatbot() {
               }}
               className="p-3 border-t border-slate-200/60 dark:border-slate-800/60 flex items-center gap-2"
             >
+              <label htmlFor="chatbot-message" className="sr-only">
+                {t('chat_placeholder')}
+              </label>
               <input
+                id="chatbot-message"
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder={t('chat_placeholder')}
+                autoComplete="off"
                 className="flex-1 bg-slate-100 dark:bg-slate-900 border-none outline-none focus:ring-1 focus:ring-emerald-500/50 px-4 py-2.5 rounded-2xl text-xs text-slate-800 dark:text-slate-200"
               />
               <button 
                 type="submit"
                 disabled={!inputValue.trim()}
                 className="w-9 h-9 rounded-2xl bg-emerald-500 disabled:bg-emerald-200 dark:disabled:bg-emerald-900 disabled:text-white text-white flex items-center justify-center hover:bg-emerald-600 transition-all shrink-0 cursor-pointer"
+                aria-label={language === 'vi' ? 'Gửi tin nhắn cho trợ lý AI' : 'Send message to AI assistant'}
               >
                 <Send className="w-4 h-4" />
               </button>
@@ -272,6 +279,8 @@ export default function Chatbot() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className="group relative flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg shadow-emerald-500/20 hover:bg-emerald-600 dark:bg-emerald-600 dark:hover:bg-emerald-500 sm:h-14 sm:w-14"
+        aria-label={isOpen ? (language === 'vi' ? 'Đóng trợ lý AI' : 'Close AI assistant') : (language === 'vi' ? 'Mở trợ lý AI' : 'Open AI assistant')}
+        aria-expanded={isOpen}
       >
         <div className="absolute inset-0 rounded-full border-2 border-emerald-400/30 animate-ping pointer-events-none" />
         

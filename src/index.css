@@ -77,6 +77,48 @@ body {
   scroll-behavior: smooth;
 }
 
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid #0f766e;
+  outline-offset: 3px;
+}
+
+.text-slate-400 {
+  color: #475569;
+}
+
+.text-slate-500 {
+  color: #475569;
+}
+
+.text-emerald-500 {
+  color: #047857;
+}
+
+.text-emerald-600 {
+  color: #065f46;
+}
+
+.text-rose-500 {
+  color: #be123c;
+}
+
+.text-amber-500 {
+  color: #b45309;
+}
+
+.text-sky-500 {
+  color: #0369a1;
+}
+
+.text-purple-500 {
+  color: #7e22ce;
+}
+
 main {
   scroll-timeline-name: --heliring-story;
   scroll-timeline-axis: block;

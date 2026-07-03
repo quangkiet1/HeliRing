@@ -25,7 +25,7 @@ export default function Header() {
     }`}>
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2 group">
+        <a href="#" className="flex items-center gap-2 group" aria-label="HELICORP home">
           <div className="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center text-white font-bold shadow-md shadow-emerald-500/20">
             <Activity className="w-4 h-4" />
           </div>
@@ -35,7 +35,7 @@ export default function Header() {
         </a>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-wider">
+        <nav aria-label="Primary navigation" className="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-wider">
           <a href="#problem" className="text-slate-600 dark:text-slate-300 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors">
             {t('nav_status')}
           </a>
@@ -59,18 +59,21 @@ export default function Header() {
           <button 
             onClick={() => setLanguage(language === 'vi' ? 'en' : 'vi')}
             className="h-10 px-3 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center gap-1.5 text-[10px] font-black cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition-all select-none"
-            aria-label="Toggle Language"
           >
             <span className={language === 'vi' ? 'text-emerald-500' : 'text-slate-400 dark:text-slate-500'}>VI</span>
             <span className="text-slate-300 dark:text-slate-700">|</span>
             <span className={language === 'en' ? 'text-emerald-500' : 'text-slate-400 dark:text-slate-500'}>EN</span>
+            <span className="sr-only">
+              {language === 'vi' ? 'Switch language to English' : 'Chuyển ngôn ngữ sang tiếng Việt'}
+            </span>
           </button>
 
           {/* Theme Toggle */}
           <button 
             onClick={toggleTheme}
             className="w-10 h-10 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all cursor-pointer"
-            aria-label="Toggle Theme"
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            aria-pressed={theme === 'dark'}
           >
             {theme === 'dark' ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-slate-600" />}
           </button>
@@ -90,22 +93,29 @@ export default function Header() {
           <button 
             onClick={() => setLanguage(language === 'vi' ? 'en' : 'vi')}
             className="h-9 px-2 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center gap-1 text-[9px] font-black select-none"
-            aria-label="Toggle Language"
           >
             <span className={language === 'vi' ? 'text-emerald-500' : 'text-slate-400 dark:text-slate-500'}>VI</span>
             <span className="text-slate-300 dark:text-slate-700">|</span>
             <span className={language === 'en' ? 'text-emerald-500' : 'text-slate-400 dark:text-slate-500'}>EN</span>
+            <span className="sr-only">
+              {language === 'vi' ? 'Switch language to English' : 'Chuyển ngôn ngữ sang tiếng Việt'}
+            </span>
           </button>
 
           <button 
             onClick={toggleTheme}
             className="w-9 h-9 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center justify-center text-slate-600 dark:text-slate-300"
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            aria-pressed={theme === 'dark'}
           >
             {theme === 'dark' ? <Sun className="w-4.5 h-4.5 text-yellow-400" /> : <Moon className="w-4.5 h-4.5 text-slate-600" />}
           </button>
           <button 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="p-1.5 text-slate-600 dark:text-slate-300"
+            aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-navigation"
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -114,7 +124,7 @@ export default function Header() {
 
       {/* Mobile Menu Backdrop & Drawer */}
       {isMobileMenuOpen && (
-        <div className="md:hidden fixed inset-x-0 top-[73px] bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 py-6 px-6 flex flex-col gap-5 shadow-xl animate-fade-in z-45">
+        <nav id="mobile-navigation" aria-label="Mobile navigation" className="md:hidden fixed inset-x-0 top-[73px] bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 py-6 px-6 flex flex-col gap-5 shadow-xl animate-fade-in z-45">
           <a 
             href="#problem" 
             onClick={() => setIsMobileMenuOpen(false)}
@@ -157,7 +167,7 @@ export default function Header() {
           >
             {t('cta_now')}
           </a>
-        </div>
+        </nav>
       )}
     </header>
   );

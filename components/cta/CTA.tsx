@@ -100,15 +100,23 @@ export default function CTA() {
           <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 items-stretch">
             
             <div className="relative flex-1">
+              <label htmlFor="discount-email" className="sr-only">
+                {t('cta_form_email_placeholder')}
+              </label>
               <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-slate-500">
                 <Mail className="w-5 h-5" />
               </div>
               <input 
+                id="discount-email"
                 type="email"
                 required
+                autoComplete="email"
+                inputMode="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder={t('cta_form_email_placeholder')}
+                aria-invalid={status === 'error'}
+                aria-describedby={message ? 'discount-form-status' : undefined}
                 className="w-full pl-12 pr-4 py-4 rounded-xl border border-slate-800 bg-slate-950 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 text-sm font-sans transition-all"
               />
             </div>
@@ -134,7 +142,7 @@ export default function CTA() {
           </form>
 
           {/* Feedback states using AnimatePresence */}
-          <div className="min-h-12 mt-4 flex items-center justify-center">
+          <div id="discount-form-status" className="min-h-12 mt-4 flex items-center justify-center" aria-live="polite" aria-atomic="true">
             <AnimatePresence mode="wait">
               {status === 'success' && (
                 <motion.div 
