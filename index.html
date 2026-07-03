@@ -3,6 +3,109 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" media="print" onload="this.onload=null;this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" />
+    </noscript>
+    <style>
+      .critical-shell {
+        min-height: 100vh;
+        display: grid;
+        align-items: center;
+        background: #ffffff;
+        color: #0f172a;
+        font-family: "Be Vietnam Pro", system-ui, sans-serif;
+        overflow: hidden;
+        padding: 5.5rem 1.5rem 3rem;
+      }
+      .critical-grid {
+        width: min(100%, 74rem);
+        margin: 0 auto;
+        display: grid;
+        gap: 2rem;
+      }
+      .critical-logo {
+        position: fixed;
+        top: 1.5rem;
+        left: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-weight: 900;
+        font-size: 1.25rem;
+      }
+      .critical-mark {
+        display: grid;
+        place-items: center;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 0.65rem;
+        background: #10b981;
+        color: #ffffff;
+        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+      }
+      .critical-title {
+        margin: 0 0 1.25rem;
+        font-size: clamp(3.2rem, 15vw, 6rem);
+        line-height: 0.9;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+      .critical-title span {
+        color: #10b981;
+      }
+      .critical-copy {
+        max-width: 38rem;
+        margin: 0;
+        color: #475569;
+        font-size: clamp(1rem, 4vw, 1.25rem);
+        line-height: 1.65;
+        font-weight: 600;
+      }
+      .critical-ring-wrap {
+        order: -1;
+        min-height: 18rem;
+        display: grid;
+        place-items: center;
+        background: radial-gradient(circle, rgba(16, 185, 129, 0.18), transparent 62%);
+      }
+      .critical-ring {
+        position: relative;
+        width: clamp(11rem, 48vw, 17rem);
+        aspect-ratio: 1;
+        border: clamp(1.5rem, 7vw, 2.2rem) solid rgba(148, 163, 184, 0.58);
+        border-radius: 999px;
+        transform: rotate(-16deg);
+        box-shadow: inset 18px 0 30px rgba(255, 255, 255, 0.92), inset -18px 0 24px rgba(15, 23, 42, 0.12), 0 28px 70px rgba(15, 23, 42, 0.08);
+      }
+      .critical-ring::after {
+        content: "";
+        position: absolute;
+        inset: 33%;
+        border-radius: inherit;
+        background: #6ee7b7;
+        filter: blur(5px);
+      }
+      @media (min-width: 900px) {
+        .critical-shell {
+          padding-inline: 3rem;
+        }
+        .critical-logo {
+          left: calc(50% - 37rem);
+        }
+        .critical-grid {
+          grid-template-columns: minmax(0, 1.1fr) minmax(20rem, 0.9fr);
+          align-items: center;
+        }
+        .critical-ring-wrap {
+          order: initial;
+          min-height: 34rem;
+        }
+      }
+    </style>
     
     <!-- Primary Meta Tags -->
     <title>HeliRing Pro - Nhẫn Sức Khỏe Thông Minh | Sinh Hiệu Chuẩn Y Khoa</title>
@@ -29,7 +132,23 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💍</text></svg>" />
   </head>
   <body class="bg-brand-light-bg text-brand-light-text dark:bg-brand-dark-bg dark:text-brand-dark-text antialiased">
-    <div id="root"></div>
+    <div id="root">
+      <div class="critical-shell">
+        <div class="critical-logo">
+          <span class="critical-mark">~</span>
+          <span>HELICORP</span>
+        </div>
+        <div class="critical-grid">
+          <main>
+            <h1 class="critical-title">HELIRING<br /><span>CHỦ ĐỘNG<br />SỐNG KHỎE.</span></h1>
+            <p class="critical-copy">Nhẫn sức khỏe thông minh thế hệ mới từ HELICORP. Theo dõi nhịp tim, SpO2, stress và giấc ngủ với thiết kế Titanium siêu nhẹ.</p>
+          </main>
+          <div class="critical-ring-wrap" aria-hidden="true">
+            <div class="critical-ring"></div>
+          </div>
+        </div>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

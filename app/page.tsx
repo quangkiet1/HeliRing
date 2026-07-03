@@ -1,14 +1,14 @@
 'use client';
 
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import Hero from '@/components/hero/Hero';
-import ProblemContext from '@/components/features/ProblemContext';
-import BioPulseTracker from '@/components/animation/BioPulseTracker';
-import StoryProgress from '@/components/animation/StoryProgress';
 
 const Chatbot = lazy(() => import('@/components/layout/Chatbot'));
+const ProblemContext = lazy(() => import('@/components/features/ProblemContext'));
+const BioPulseTracker = lazy(() => import('@/components/animation/BioPulseTracker'));
+const StoryProgress = lazy(() => import('@/components/animation/StoryProgress'));
 const VitalsSimulator = lazy(() => import('@/components/features/VitalsSimulator'));
 const TechShowcase = lazy(() => import('@/components/features/TechShowcase'));
 const Portability = lazy(() => import('@/components/features/Portability'));
@@ -24,12 +24,42 @@ function SectionFallback() {
   );
 }
 
+function useIdleDesktopDecorations() {
+  const [enabled, setEnabled] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia('(min-width: 1280px)');
+    if (!media.matches) return;
+
+    const scheduler = window as Window & {
+      requestIdleCallback?: (callback: IdleRequestCallback, options?: IdleRequestOptions) => number;
+      cancelIdleCallback?: (handle: number) => void;
+    };
+
+    if (scheduler.requestIdleCallback && scheduler.cancelIdleCallback) {
+      const idleId = scheduler.requestIdleCallback(() => setEnabled(true), { timeout: 1800 });
+      return () => scheduler.cancelIdleCallback?.(idleId);
+    }
+
+    const timeoutId = window.setTimeout(() => setEnabled(true), 900);
+    return () => window.clearTimeout(timeoutId);
+  }, []);
+
+  return enabled;
+}
+
 export default function Home() {
+  const loadDecorations = useIdleDesktopDecorations();
+
   return (
     <div className="relative min-h-screen overflow-hidden bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
       
       {/* Signature Hardware-Accelerated BioPulse Tracker & Vitals HUD */}
-      <BioPulseTracker />
+      {loadDecorations && (
+        <Suspense fallback={null}>
+          <BioPulseTracker />
+        </Suspense>
+      )}
 
       {/* Global Fixed Navigation Header */}
       <Header />
@@ -40,7 +70,11 @@ export default function Home() {
       </Suspense>
 
       {/* Scrollytelling progress rail */}
-      <StoryProgress />
+      {loadDecorations && (
+        <Suspense fallback={null}>
+          <StoryProgress />
+        </Suspense>
+      )}
 
       {/* Structured Long-form Storytelling Flow */}
       <main>
@@ -52,7 +86,9 @@ export default function Home() {
 
         {/* Section 2: Problem Context - The invisible threat (PM2.5, dust) */}
         <section id="problem-context" className="story-panel relative">
-          <ProblemContext />
+          <Suspense fallback={<SectionFallback />}>
+            <ProblemContext />
+          </Suspense>
         </section>
 
         {/* Section 2.5: Interactive Vitals Simulation & Live ECG HUD */}
